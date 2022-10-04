@@ -23,13 +23,13 @@ ${current max}      ${DEFAULT MAX}
 *** Keywords ***
 	
 Span should be loaded
-	[Arguments]		${xpath}=${Result ID}
+	[Arguments]		${xpath}
 	Page Should Contain Element    ${xpath}
     
 Input Min
     [Arguments]    ${Min}
     Unselect Frame
-	Select Frame	xpath://div[@id="homepage-generator"]//iframe
+    Select Frame	xpath://div[@id="homepage-generator"]//iframe
     ${path} =   Set Variable    xpath://html//body//div//span[2]//input
     Span should be loaded       ${path}
     ${IDmin} =  Get Element Attribute     ${path}    id
@@ -42,7 +42,7 @@ Input Min
 Input Max
     [Arguments]    ${Max}
     Unselect Frame
-	Select Frame	xpath://div[@id="homepage-generator"]//iframe
+    Select Frame	xpath://div[@id="homepage-generator"]//iframe
     ${path} =   Set Variable    xpath://html//body//div//span[3]//input
     Span should be loaded       ${path}
     ${IDmax} =  Get Element Attribute     ${path}    id
@@ -52,7 +52,7 @@ Input Max
 
 Generate Number
     Unselect Frame
-	Select Frame	xpath://div[@id="homepage-generator"]//iframe
+    Select Frame	xpath://div[@id="homepage-generator"]//iframe
     ${path} =   Set Variable    xpath://html//body//div//span[4]//input
     Span should be loaded       ${path}
     ${IDsubmit} =  Get Element Attribute     ${path}    id
