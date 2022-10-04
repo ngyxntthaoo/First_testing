@@ -11,8 +11,8 @@ Library           SeleniumLibrary
 ${SERVER}         random.org
 ${BROWSER}        Firefox
 ${DELAY}          0
-${DEFAULT MIN}      0
-${DEFAULT Max}      100
+${DEFAULT MIN}    0
+${DEFAULT Max}    100
 ${Main URL}       http://${SERVER}/
 
 *** Keywords ***
