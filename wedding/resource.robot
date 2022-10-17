@@ -8,12 +8,19 @@ Documentation     A resource file with reusable keywords and variables.
 Library           FlaUILibrary
 
 *** Variables ***
-${name}            WeddingManagementApplication.exe
+${name}           WeddingManagementApplication.exe
+${path}           F:\\Github\\WeddingManagement\\WeddingManagementApplication\\WeddingManagementApplication\\bin\\Debug\\WeddingManagementApplication.exe
+${PID}            0
 *** Keywords ***
 
 # This is a keyword that can be used to start the application under test.
 # It is a good idea to use a keyword for this, because it can be used
 # in multiple test cases.
 Attach Application
-    Attach Application By Name    ${name}
+    ${pid}    Launch Application    ${path}
+    Set Suite Variable    ${PID}    ${pid}
+    Attach Application By PID    ${pid}
+
+Shutdown Application
+    Close Application    ${PID}
 
