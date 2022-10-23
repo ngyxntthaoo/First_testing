@@ -24,9 +24,3 @@ ${WrongPasswordDialog}    /Window[@AutomationId='FormLogin']/Window/Text[@Name='
 ${FormHome}    /Window[@AutomationId='FormHome']
 
 *** Keywords ***
-
-Log In
-    [Arguments]    ${username}    ${password}
-    Press Key    t'${username}'    /Window[@AutomationId='FormLogin']/Pane[1]/Edit[2]
-    Press Key    t'${password}'    /Window[@AutomationId='FormLogin']/Pane[1]/Edit[1]
-    Click    /Window[@AutomationId='FormLogin']/Pane[1]/Button

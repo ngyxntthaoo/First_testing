@@ -1,2 +1,3 @@
 --outputdir results
-testcases.robot
+login_testcases.robot
+account_testcases.robot

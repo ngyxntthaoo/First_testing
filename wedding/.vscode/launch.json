@@ -9,14 +9,16 @@
             "type": "robotcode",
             "request": "launch",
             "cwd": "${workspaceFolder}",
-            "target": "args.robot"
+            "target": "${file}",
+            "outputDir": "${workspaceFolder}/results"
         },
         {
             "name": "RobotCode: Run All",
             "type": "robotcode",
             "request": "launch",
             "cwd": "${workspaceFolder}",
-            "target": "args.robot"
+            "target": "${file}",
+            "outputDir": "${workspaceFolder}/results"
         }
     ]
 }
