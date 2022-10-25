@@ -39,3 +39,28 @@ Add Invalid Account With Invalid Identification
     Add Account  iden=${randomiden}
     Element Should Be Visible  ${invalid iden}  Account added with invalid identification
 
+Update Account Username
+    [Documentation]    A test case for updating an account username
+    [Tags]    Account    Update
+    ${newUsername}  Generate Random String  10
+    ${selected cell}  Select Closest Selectable  ${table_accounts}  Username
+    ${value}  Get Text From Textbox  ${selected cell}
+    Press Key  t'${newUsername}'  ${tb_username}
+    Click  ${btn_update_account}
+    ${status}  Run Keyword And Return Status  Select Cell With Attribute And Value  ${table_accounts}  Username  ${value}
+    Should Not Be True  ${status}  Account username not updated, or the updated value is equal to the old value
+
+Delete Account
+    [Documentation]    A test case for deleting an account
+    [Tags]    Account    Delete
+    ${selected cell}  Select Closest Selectable  ${table_accounts}  Username
+    ${value}  Get Text From Textbox  ${selected cell}
+    Click  ${btn_delete_account}
+    Element Should Be Visible  ${accDeleted}  Account not deleted
+    Press Key  s'ENTER'
+    ${status}  Run Keyword And Return Status  Select Cell With Attribute And Value  ${table_accounts}  Username  ${value}
+    Should Not Be True  ${status}  Account not deleted
+    Shutdown Application
+    Attach Application
+    Log In  ${value}  ${value}
+    Element Should Not Exist  ${formHome}  Account not deleted

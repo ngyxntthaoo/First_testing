@@ -15,17 +15,23 @@ ${formAccount}  ${formHome}/Window[@AutomationId="FormAccount"]
 # dialogs
 ${accCreated}  ${formAccount}/Window/Text[@Name="Account created!"]
 ${invalid iden}  ${formAccount}/Window/Text[@Name="Invalid Identification"]
+${accDeleted}  ${formAccount}/Window/Text[@Name="Account deleted!"]
 
 # buttons
 ${btnSearch}  ${formHome}/Pane[@AutomationId="panel1"]/Button[@AutomationId="btnSearch"]
 ${btnAccount}  ${formHome}/Pane[@AutomationId="searchDropDown1"]/Pane[@AutomationId="flowLayoutPanel1"]/Button[@AutomationId="btnAccount"]
 ${btn_add_account}  ${formAccount}/Button[@AutomationId="btn_add_account"]
+${btn_update_account}  ${formAccount}/Button[@AutomationId="btn_update_account"]
+${btn_delete_account}  ${formAccount}/Button[@AutomationId="btn_delete_account"]
 
 # textboxes
 ${tb_username}  ${formAccount}/Edit[@AutomationId="tb_username"]
 ${tb_password}  ${formAccount}/Edit[@AutomationId="tb_password"]
 ${tb_name}  ${formAccount}/Edit[@AutomationId="tb_name"]
 ${tb_iden}  ${formAccount}/Edit[@AutomationId="tb_iden"]
+
+# tables
+${table_accounts}  ${formAccount}/Table[@AutomationId="gv_act"]
 
 *** Keywords ***
 Test Setup
