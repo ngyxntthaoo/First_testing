@@ -9,7 +9,6 @@ ${username}  ${EMPTY}
 ${password}  ${EMPTY}
 
 # windows
-${formHome}  /Window[@AutomationId='FormHome']
 ${formAccount}  ${formHome}/Window[@AutomationId="FormAccount"]
 
 # dialogs
@@ -18,7 +17,6 @@ ${invalid iden}  ${formAccount}/Window/Text[@Name="Invalid Identification"]
 ${accDeleted}  ${formAccount}/Window/Text[@Name="Account deleted!"]
 
 # buttons
-${btnSearch}  ${formHome}/Pane[@AutomationId="panel1"]/Button[@AutomationId="btnSearch"]
 ${btnAccount}  ${formHome}/Pane[@AutomationId="searchDropDown1"]/Pane[@AutomationId="flowLayoutPanel1"]/Button[@AutomationId="btnAccount"]
 ${btn_add_account}  ${formAccount}/Button[@AutomationId="btn_add_account"]
 ${btn_update_account}  ${formAccount}/Button[@AutomationId="btn_update_account"]
@@ -65,13 +63,6 @@ Open Account Form
     Click  ${btnAccount}
     Wait Until Element Is Visible  ${formAccount}
     ${current_window}  Set Global Variable  ${formAccount}
-
-Open Search Dropdown
-    [Documentation]    A keyword for opening the search dropdown
-    [Tags]    Search
-    Click  ${btnSearch}
-    ${Result}  Run Keyword And Return Status  Element Should Be Visible  ${btnAccount}  ${False}
-    Run Keyword If  ${Result} == ${False}  Open Search Dropdown
 
 Search Account
     [Arguments]  ${string to search}

@@ -14,6 +14,31 @@ ${PID}            0
 ${i}              -1
 ${selected_table_index}
 
+# windows
+${formLogin}       /Window[@AutomationId='FormLogin']
+${formHome}        /Window[@AutomationId='FormHome']
+${formMenu}        ${formHome}/Window[@AutomationId='FormDishes']
+${formServices}    ${formHome}/Window[@AutomationId='FormServices']
+${formWedding}     ${formHome}/Window[@AutomationId='NhanTiec']
+
+${dialogCommingSoon}       ${formHome}/Window[@Name='CLOSE']
+
+
+# panes
+${searchDropDown1}  ${formHome}/Pane[@AutomationId='searchDropDown1']
+${lobbyDropDown1}   ${formHome}/Pane[@AutomationId='lobbyDropDown1']
+${reportDropDown1}  ${formHome}/Pane[@AutomationId='reportDropDown1']
+
+# buttons
+${btnSearch}    ${formHome}/Pane[@AutomationId="panel1"]/Button[@AutomationId="btnSearch"]
+${btnLobby}     ${formHome}/Pane[@AutomationId="panel1"]/Button[@AutomationId="btnLobby"]
+${btnReport}    ${formHome}/Pane[@AutomationId="panel1"]/Button[@AutomationId="btnReport"]
+${btnMenu}      ${formHome}/Pane[@AutomationId="panel1"]/Button[@AutomationId="btnMenu"]
+${btnService}   ${formHome}/Pane[@AutomationId="panel1"]/Button[@AutomationId="btnService"]
+${btnWedding}   ${formHome}/Pane[@AutomationId="panel1"]/Button[@AutomationId="btnWedding"]
+${btnSettings}  ${formHome}/Pane[@AutomationId="panel1"]/Button[@AutomationId="btnSettings"]
+${btnLogout}    ${formHome}/Pane[@AutomationId="panel1"]/Button[@AutomationId="btnLogout"]
+
 *** Keywords ***
 Attach Application
     ${pid}    Launch Application    ${path}
@@ -82,3 +107,77 @@ Move To Target Row
     Run Keyword If  ${diff} < 0  Press Key  s'UP'  ${diff}
     ...  ELSE IF  ${diff} > 0  Press Key  s'DOWN'  ${diff}
     ...  ELSE  No Operation
+
+Open Search Dropdown
+    [Documentation]    A keyword for opening the search dropdown
+    [Tags]    Search
+    Click  ${btnSearch}
+    ${Result}  Run Keyword And Return Status  Element Should Be Visible  ${searchDropDown1}
+    Run Keyword If  ${Result} == ${False}  Open Search Dropdown
+
+Open Lobby Dropdown
+    [Documentation]    A keyword for opening the lobby dropdown
+    [Tags]    Lobby
+    Click  ${btnLobby}
+    ${Result}  Run Keyword And Return Status  Element Should Be Visible  ${lobbyDropDown1}
+    Run Keyword If  ${Result} == ${False}  Open Lobby Dropdown
+
+Open Report Dropdown
+    [Documentation]    A keyword for opening the report dropdown
+    [Tags]    Report
+    Click  ${btnReport}
+    ${Result}  Run Keyword And Return Status  Element Should Be Visible  ${reportDropDown1}
+    Run Keyword If  ${Result} == ${False}  Open Report Dropdown
+
+Open Menu Window
+    [Documentation]    A keyword for opening the menu page
+    [Tags]    Menu
+    Click  ${btnMenu}
+    Element Should Be Visible  ${formMenu}
+
+Close Menu Window
+    [Documentation]    A keyword for closing the menu page
+    [Tags]    Menu
+    Click  ${formMenu}/Text[@Name="X"]
+    Element Should Not Exist  ${formMenu}
+
+Open Settings Window
+    [Documentation]    A keyword for opening the settings page
+    [Tags]    Settings
+    Click  ${btnSettings}
+    Element Should Exist  ${dialogCommingSoon}
+
+Open Wedding Window
+    [Documentation]    A keyword for opening the wedding page
+    [Tags]    Wedding
+    Click  ${btnWedding}
+    Element Should Be Visible  ${formWedding}
+
+Close Wedding Window
+    [Documentation]    A keyword for closing the wedding page
+    [Tags]    Wedding
+    Click  ${formWedding}/Text[@Name="X"]
+    Element Should Not Exist  ${formWedding}
+
+Open Service Window
+    [Documentation]    A keyword for opening the service page
+    [Tags]    Service
+    Click  ${btnService}
+    Element Should Be Visible  ${formServices}
+
+Close Service Window
+    [Documentation]    A keyword for closing the service page
+    [Tags]    Service
+    Click  ${formServices}/Text[@Name="X"]
+    Element Should Not Exist  ${formServices}
+
+Log Out
+    [Documentation]    A keyword for logging out of the application
+    [Tags]    Logout
+    Click  ${btnLogout}
+    Element Should Be Visible  ${formLogin}
+
+ENTER
+    [Documentation]    A keyword for pressing the ENTER key
+    [Tags]    Keyboard
+    Press Key  s'ENTER'
