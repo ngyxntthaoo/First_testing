@@ -6,6 +6,9 @@ Resource      resource.robot
 # textboxes
 ${tb_search}    ${formMenu}/Edit[@AutomationId="tb_search_dishes"]
 
+# buttons
+${btn_menu_search}    ${formMenu}/Button[@AutomationId="btn_search"]
+
 # tables
 ${table_menu}   ${formMenu}/Table[@AutomationId="data_gv_dishes"]
 
@@ -46,4 +49,3 @@ Search Menu
         ${i}  Evaluate  ${i} + 1
     END
     Should Not Be True  ${wrong}  Found account with wrong data
-    

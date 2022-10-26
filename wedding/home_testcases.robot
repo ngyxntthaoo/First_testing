@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation    A test suite containing tests for the home page for
+Documentation    A test suite containing tests for the home page of the
 ...              app Wedding Management
 Resource    resource.robot
 Suite Setup    Run Keywords  Attach Application  AND  Log In  123  123

@@ -181,3 +181,42 @@ ENTER
     [Documentation]    A keyword for pressing the ENTER key
     [Tags]    Keyboard
     Press Key  s'ENTER'
+
+Search Table
+    [Arguments]  ${table}  ${string to search}  ${ignore_case}  @{attributes}
+    [Documentation]    A keyword for searching a table
+    ...                This keyword return True when all rows
+    ...                in the table contain the string to search
+    ...                in their specified attributes (columns)
+    ...                If the table contains no rows, it will also return True
+    ...                This keyword return False when there is at least
+    ...                one row that does not contain the string to search.
+    ${continue}  Set Variable  ${True}
+    ${wrong}  Set Variable  ${False}
+    ${i}  Set Variable  0
+    Log  ${attributes}
+    Run Keyword And Return Status  Select Closest Selectable  ${table}  ${attributes[0]}
+    WHILE  ${continue}
+        ${condition 1}  Run Keyword And Return Status  Element Should Exist  ${table}/Custom[@Name="Row ${i}"]
+        IF  ${condition 1}
+            ${condition 2}  Set Variable  ${False}
+            FOR  ${attribute}  IN  @{attributes}
+                ${value}    Get Text From Textbox   ${table}/Custom[@Name="Row ${i}"]/Edit[@Name="${attribute} Row ${i}, Not sorted."]
+                ${condition 2}  Run Keyword And Return Status  Should Contain  ${value}  ${string to search}  ignore_case=${ignore_case}
+                IF  ${condition 2}
+                    BREAK
+                END
+            END
+            IF  ${condition 2} == ${False}
+                ${continue}  Set Variable  ${False}
+                ${wrong}  Set Variable  ${True}
+                BREAK
+            END
+        ELSE
+            ${continue}  Set Variable  ${False}
+        END
+        Press Key  s'DOWN'
+        ${i}  Evaluate  ${i} + 1
+    END
+    Should Not Be True  ${wrong}  Found row with wrong data
+    
