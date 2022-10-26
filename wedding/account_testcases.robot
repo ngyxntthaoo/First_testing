@@ -64,3 +64,17 @@ Delete Account
     Attach Application
     Log In  ${value}  ${value}
     Element Should Not Exist  ${formHome}  Account not deleted
+
+Search Existing Account
+    [Documentation]    A test case for searching an existing account
+    [Tags]    Account    Search    Valid
+    ${string to search}  Set Variable  123
+    ${status}  Run Keyword And Return Status  Search Account  ${string to search}
+    Should Be True  ${status}  Account found with non-existing search string
+
+Search Non-Existing Account
+    [Documentation]    A test case for searching a non-existing account
+    [Tags]    Account    Search    Invalid
+    ${string to search}  Set Variable  hdsgfjsgfjhsdgfuysdgfuysdgfutsdgfutgsutfgtyusd
+    ${status}  Run Keyword And Return Status  Search Account  ${string to search}
+    Should Be True  ${status}  Account found with non-existing search string

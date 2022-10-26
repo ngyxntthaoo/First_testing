@@ -25,6 +25,7 @@ ${btn_update_account}  ${formAccount}/Button[@AutomationId="btn_update_account"]
 ${btn_delete_account}  ${formAccount}/Button[@AutomationId="btn_delete_account"]
 
 # textboxes
+${tb_search}  ${formAccount}/Edit[@AutomationId="tb_search"]
 ${tb_username}  ${formAccount}/Edit[@AutomationId="tb_username"]
 ${tb_password}  ${formAccount}/Edit[@AutomationId="tb_password"]
 ${tb_name}  ${formAccount}/Edit[@AutomationId="tb_name"]
@@ -71,3 +72,42 @@ Open Search Dropdown
     Click  ${btnSearch}
     ${Result}  Run Keyword And Return Status  Element Should Be Visible  ${btnAccount}  ${False}
     Run Keyword If  ${Result} == ${False}  Open Search Dropdown
+
+Search Account
+    [Arguments]  ${string to search}
+    [Documentation]    A keyword for searching an account
+    ...                This keyword return True when all the accounts
+    ...                in the table contain the string to search
+    ...                in their username, name or identification
+    ...                If the table contains no accounts, it will also return True
+    ...                This keyword return False when there is at least
+    ...                one account that does not contain the string to search
+    Press Key  t'${string to search}'  ${tb_search}
+    Press Key  s'ENTER'
+    ${continue}  Set Variable  ${True}
+    ${wrong}  Set Variable  ${False}
+    ${i}  Set Variable  0
+    Select Closest Selectable  ${table_accounts}  Username
+    WHILE  ${continue}
+        ${condition 1}  Element Should Exist  ${table_accounts}/Custom[@Name="Row ${i}"]
+        IF  ${condition 1}
+            ${us}  Get Text From Textbox  ${table_accounts}/Custom[@Name="Row ${i}"]/Edit[@Name="Username Row ${i}, Not sorted."]
+            ${name}  Get Text From Textbox  ${table_accounts}/Custom[@Name="Row ${i}"]/Edit[@Name="Name Row ${i}, Not sorted."]
+            ${iden}  Get Text From Textbox  ${table_accounts}/Custom[@Name="Row ${i}"]/Edit[@Name="Identification Row ${i}, Not sorted."]
+            ${condition 2}  Run Keyword And Return Status  Should Contain  ${us}  ${string to search}
+            ${condition 3}  Run Keyword And Return Status  Should Contain  ${name}  ${string to search}
+            ${condition 4}  Run Keyword And Return Status  Should Contain  ${iden}  ${string to search}
+            IF  ${condition 2} or ${condition 3} or ${condition 4}
+                No Operation
+            ELSE
+                ${continue}  Set Variable  ${False}
+                ${wrong}  Set Variable  ${True}
+            END
+        ELSE
+            ${continue}  Set Variable  ${False}
+        END
+        Press Key  s'DOWN'
+        ${i}  Evaluate  ${i} + 1
+    END
+    Should Not Be True  ${wrong}  Found account with wrong data
+    
