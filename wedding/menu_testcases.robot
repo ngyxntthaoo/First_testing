@@ -29,6 +29,27 @@ Menu search v04
     [Tags]    menu  search  v04
     Search  20.000
 
+Menu add v01
+    [Documentation]    Add a menu item with valid values
+    [Tags]    menu  add  v01
+    Add Menu    canh cua  30000  a
+    Element Should Exist  ${menu_added}
+    Press Key  s'ENTER'
+    Search  canh cua
+
+Menu add v02
+    [Documentation]    Add a menu item with invalid name
+    [Tags]    menu  add  v02
+    Add Menu  1234  30000
+    Element Should Not Exist  ${menu_added}  invalid dish added
+
+Menu add v03
+    [Documentation]    Add a menu item with invalid name
+    [Tags]    menu  add  v03
+    Add Menu  \#bánh bò  332000
+    Element Should Not Exist  ${menu_added}  invalid dish added
+
+
 
 *** Keywords ***
 Search

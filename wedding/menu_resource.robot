@@ -3,11 +3,20 @@ Resource      resource.robot
 
 *** Variables ***
 
+# dialogs
+${menu_added}   ${formMenu}/Window[@Name="SUCCESS"]
+
 # textboxes
 ${tb_search}    ${formMenu}/Edit[@AutomationId="tb_search_dishes"]
+${tb_name}      ${formMenu}/Edit[@AutomationId="tb_dishes_name"]
+${tb_price}     ${formMenu}/Edit[@AutomationId="tb_dishes_price"]
+${tb_note}      ${formMenu}/Edit[@AutomationId="tb_dishes_note"]
 
 # buttons
 ${btn_menu_search}    ${formMenu}/Button[@AutomationId="btn_search"]
+${btn_menu_add}       ${formMenu}/Button[@AutomationId="btn_add_dishes"]
+${btn_menu_update}    ${formMenu}/Button[@AutomationId="btn_update_dishes"]
+${btn_menu_delete}    ${formMenu}/Button[@AutomationId="btn_delete_dishes"]
 
 # tables
 ${table_menu}   ${formMenu}/Table[@AutomationId="data_gv_dishes"]
@@ -49,3 +58,16 @@ Search Menu
         ${i}  Evaluate  ${i} + 1
     END
     Should Not Be True  ${wrong}  Found account with wrong data
+
+Add Menu
+    [Arguments]  ${name}  ${price}  ${note}=${EMPTY}
+    LOG  ${name} ${price} ${note}
+    [Documentation]    A keyword for adding a menu
+    ...                This keyword return True when the menu is added successfully
+    ...                This keyword return False when the menu is not added successfully
+    Press Key  t'${name}'  ${tb_name}
+    Press Key  t'${price}'  ${tb_price}
+    IF  '${note}' != '${EMPTY}'
+        Press Key  t'${note}'  ${tb_note}
+    END
+    Click  ${btn_menu_add}
