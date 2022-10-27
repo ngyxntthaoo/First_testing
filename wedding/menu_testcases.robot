@@ -1,6 +1,7 @@
 *** Settings ***
 Documentation    A test suite containing tests for menu of the app
 ...              Wedding Management
+Library          String
 Resource         resource.robot
 Resource         menu_resource.robot
 Suite Setup      Run Keywords  Attach Application  AND  Log In  123  123
@@ -49,6 +50,20 @@ Menu add v03
     Add Menu  \#bánh bò  332000
     Element Should Not Exist  ${menu_added}  invalid dish added
 
+Menu update v01
+    [Documentation]    Update a menu item with valid values
+    [Tags]    menu  update  v01
+    ${cell}  Select Closest Selectable  ${table_menu}  Dishes name
+    ${value}  Get Text From Textbox  ${cell}
+    Click  ${cell}
+    ${random}  Generate Random String  20
+    ${rannum}  Generate Random String  5-9  [NUMBERS]
+    Press Key  t'${random}'  ${tb_name}
+    Press Key  t'${rannum}'  ${tb_price}
+    Press Key  t'${random}${rannum}'  ${tb_note}
+    Click  ${btn_menu_update}
+    ENTER
+    Search  ${random}
 
 
 *** Keywords ***
