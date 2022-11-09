@@ -69,6 +69,7 @@ Select Cell With Attribute
     ...  ELSE  Run Keywords  Press Key  s'DOWN'  AND  Select Cell With Attribute  ${table}  ${attribute}  ${value}
 
 Select Cell With Attribute And Value
+    [Documentation]  Selects a cell in a table with a given attribute and value.
     [Arguments]  ${table}  ${attribute}  ${value}
     [Return]  ${i}
     # check if attribute exists

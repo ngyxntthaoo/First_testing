@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "RobotCode: Run Current",
+                                     "name": "RobotCode: Run Current",
             "type": "robotcode",
             "request": "launch",
             "cwd": "${workspaceFolder}",
