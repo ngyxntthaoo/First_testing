@@ -65,6 +65,41 @@ Menu update v01
     ENTER
     Search  ${random}
 
+ADMEID01
+    Add Menu    canh cua  30000
+    Element Should Exist  ${menu_added}
+    Press Key  s'ENTER'
+    Search  canh cua
+
+ADMEID02
+    Add Menu    canh cua  30000
+    Element Should Exist  ${formMenu}/Window/Text[@Name="A dishes existed!"]
+    Press Key  s'ENTER'
+
+ADMEID03
+    Add Menu    \#bánh b0  332000
+    Element Should Exist  ${formMenu}/Window/Text[@Name="Dishes name is invalid!"]
+    Press Key  s'ENTER'
+
+ADMEID04
+    Add Menu    \#bánh b0  123a
+    Element Should Exist  ${formMenu}/Window/Text[@Name="Price must be number!"]
+    Press Key  s'ENTER'
+
+ADMEID05
+    Add Menu    ${EMPTY}  ${EMPTY}
+    Element Should Exist  ${formMenu}/Window/Text[@Name="Please out fill all the fields!"]
+    Press Key  s'ENTER'
+
+ADMEID06
+    Add Menu    ${EMPTY}  332000
+    Element Should Exist  ${formMenu}/Window/Text[@Name="Please out fill all the fields!"]
+    Press Key  s'ENTER'
+
+ADMEID07
+    Add Menu    canh cua  -1
+    Element Should Exist  ${formMenu}/Window/Text[@Name="Price is invalid!"]
+    Press Key  s'ENTER'
 
 *** Keywords ***
 Search
