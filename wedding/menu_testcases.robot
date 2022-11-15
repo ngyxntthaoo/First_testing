@@ -83,7 +83,7 @@ ADMEID03
 
 ADMEID04
     Add Menu    \#bánh b0  123a
-    Element Should Exist  ${formMenu}/Window/Text[@Name="Price must be number!"]
+    Element Should Exist  ${formMenu}/Window/Text[@Name="Price must be number"]
     Press Key  s'ENTER'
 
 ADMEID05
