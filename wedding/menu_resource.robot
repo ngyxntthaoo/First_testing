@@ -65,8 +65,12 @@ Add Menu
     [Documentation]    A keyword for adding a menu
     ...                This keyword return True when the menu is added successfully
     ...                This keyword return False when the menu is not added successfully
-    Press Key  t'${name}'  ${tb_name}
-    Press Key  t'${price}'  ${tb_price}
+    IF  '${name}' != '${EMPTY}'
+        Press Key  t'${name}'  ${tb_name}
+    END
+    IF  '${price}' != '${EMPTY}'
+        Press Key  t'${price}'  ${tb_price}
+    END
     IF  '${note}' != '${EMPTY}'
         Press Key  t'${note}'  ${tb_note}
     END

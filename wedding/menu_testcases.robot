@@ -88,12 +88,12 @@ ADMEID04
 
 ADMEID05
     Add Menu    ${EMPTY}  ${EMPTY}
-    Element Should Exist  ${formMenu}/Window/Text[@Name="Please out fill all the fields!"]
+    Element Should Exist  ${formMenu}/Window/Text[@Name="Please fill out all the fields!"]
     Press Key  s'ENTER'
 
 ADMEID06
     Add Menu    ${EMPTY}  332000
-    Element Should Exist  ${formMenu}/Window/Text[@Name="Please out fill all the fields!"]
+    Element Should Exist  ${formMenu}/Window/Text[@Name="Please fill out all the fields!"]
     Press Key  s'ENTER'
 
 ADMEID07
