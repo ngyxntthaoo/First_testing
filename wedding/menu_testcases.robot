@@ -101,6 +101,71 @@ ADMEID07
     Element Should Exist  ${formMenu}/Window/Text[@Name="Price is invalid!"]
     Press Key  s'ENTER'
 
+UDMEID01
+    ${cell}  Select Closest Selectable  ${table_menu}  Dishes name
+    ${random}  Generate Random String  20
+    ${rannum}  Generate Random String  5-9  [NUMBERS]
+    Press Key  t'${random}'  ${tb_name}
+    Press Key  t'368544'  ${tb_price}
+    Click  ${btn_menu_update}
+    Element Should Exist  ${formMenu}/Window/Text[@Name="A dish updated!"]
+    ENTER
+    Search  ${random}
+
+UDMEID02
+    ${cell}  Select Closest Selectable  ${table_menu}  Dishes name
+    ${random}  Generate Random String  20
+    ${rannum}  Generate Random String  5-9  [NUMBERS]
+    Press Key  t'${random}'  ${tb_name}
+    Press Key  s'BACK'  ${tb_price}
+    Click  ${btn_menu_update}
+    Element Should Exist  ${formMenu}/Window/Text[@Name="Please fill out all the fields!"]
+    ENTER
+    Search  ${random}
+
+UDMEID03
+    ${cell}  Select Closest Selectable  ${table_menu}  Dishes name
+    ${random}  Generate Random String  20
+    ${rannum}  Generate Random String  5-9  [NUMBERS]
+    Press Key  t'${random}'  ${tb_name}
+    Press Key  t'${random}'  ${tb_price}
+    Click  ${btn_menu_update}
+    Element Should Exist  ${formMenu}/Window/Text[@Name="Price must be number!"]
+    ENTER
+    Search  ${random}
+
+UDMEID04
+    ${cell}  Select Closest Selectable  ${table_menu}  Dishes name
+    ${random}  Generate Random String  20
+    ${rannum}  Generate Random String  5-9  [NUMBERS]
+    Press Key  s'BACK'  ${tb_name}
+    Press Key  t'${random}'  ${tb_price}
+    Click  ${btn_menu_update}
+    Element Should Exist  ${formMenu}/Window/Text[@Name="Please fill out all the fields!"]
+    ENTER
+    Search  ${random}
+
+DELMEID01
+    ${cell}  Select Closest Selectable  ${table_menu}  Dishes name
+    ${value}  Get Text From Textbox  ${cell}
+    Click  ${cell}
+    Click  ${btn_menu_delete}
+    Element Should Exist  ${formMenu}/Window/Text[@Name="A dish deleted!"]
+    ENTER
+
+DELMEID02
+    ${cell}  Select Closest Selectable  ${table_menu}  Dishes name
+    ${value}  Get Text From Textbox  ${cell}
+    Click  ${cell}
+    Click  ${btn_menu_delete}
+    Element Should Exist  ${formMenu}/Window/Text[@Name="A dish deleted!"]
+    ENTER
+
+DELMEID03
+    Click  ${btn_menu_delete}
+    Element Should Exist  ${formMenu}/Window/Text[@Name="Please select a dish to delete!"]
+    ENTER
+
 *** Keywords ***
 Search
     [Arguments]    ${search str}
