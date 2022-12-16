@@ -105,8 +105,8 @@ Move To Target Row
     ${diff}  Evaluate  ${target} - ${current}
     ${diff}  Convert To Integer  ${diff}
     # if diff is negative, move up
-    Run Keyword If  ${diff} < 0  Press Key  s'UP'  ${diff}
-    ...  ELSE IF  ${diff} > 0  Press Key  s'DOWN'  ${diff}
+    Run Keyword If  ${diff} < 0  Press Key  s'UP'
+    ...  ELSE IF  ${diff} > 0  Press Key  s'DOWN'
     ...  ELSE  No Operation
 
 Open Search Dropdown
@@ -184,7 +184,7 @@ ENTER
     Press Key  s'ENTER'
 
 Search Table
-    [Arguments]  ${table}  ${string to search}  ${ignore_case}  @{attributes}
+    [Arguments]  ${table}  ${string to search}  ${ignore_case}  ${equal}=${False}  @{attributes}
     [Documentation]    A keyword for searching a table
     ...                This keyword return True when all rows
     ...                in the table contain the string to search
@@ -194,7 +194,8 @@ Search Table
     ...                one row that does not contain the string to search.
     ${continue}  Set Variable  ${True}
     ${wrong}  Set Variable  ${False}
-    ${i}  Set Variable  0
+    Set Test Variable  ${i}  0
+    Log  this are ${i}
     Log  ${attributes}
     Run Keyword And Return Status  Select Closest Selectable  ${table}  ${attributes[0]}
     WHILE  ${continue}
@@ -203,7 +204,11 @@ Search Table
             ${condition 2}  Set Variable  ${False}
             FOR  ${attribute}  IN  @{attributes}
                 ${value}    Get Text From Textbox   ${table}/Custom[@Name="Row ${i}"]/Edit[@Name="${attribute} Row ${i}, Not sorted."]
-                ${condition 2}  Run Keyword And Return Status  Should Contain  ${value}  ${string to search}  ignore_case=${ignore_case}
+                IF  (${Equal} == ${False})  
+                    ${condition 2}  Run Keyword And Return Status  Should Contain  ${value}  ${string to search}  ignore_case=${ignore_case}
+                ELSE
+                    ${condition 2}  Run Keyword And Return Status  Should Be Equal As Integers  ${value}  ${string to search}
+                END
                 IF  ${condition 2}
                     BREAK
                 END
@@ -218,6 +223,7 @@ Search Table
         END
         Press Key  s'DOWN'
         ${i}  Evaluate  ${i} + 1
+        Set Test Variable  ${i}  ${i}
     END
     Should Not Be True  ${wrong}  Found row with wrong data
     
