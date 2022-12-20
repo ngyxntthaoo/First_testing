@@ -8,7 +8,7 @@ Test Teardown     Run Keyword And Ignore Error  Run Keywords  ENTER  AND  Click 
 Suite Teardown    Shutdown Application
 
 *** Test Cases ***
-UTCID01
+BIID01
     Press Key  t'0'  ${tb_penalty}
     Select Radiobutton  ${ruleNo}
     Select Radiobutton  ${payNo}
@@ -18,7 +18,7 @@ UTCID01
     Click  ${buttonSave}
     Element Should Be Visible  ${saved}
 
-UTCID02
+BIID02
     Press Key  t'0'  ${tb_penalty}
     Select Radiobutton  ${ruleYes}
     Select Radiobutton  ${payYes}
@@ -29,7 +29,7 @@ UTCID02
     Click  ${buttonSave}
     Element Should Be Visible  ${saved}
 
-UTCID03
+BIID03
     Press Key  t'-99999'  ${tb_penalty}
     Select Radiobutton  ${ruleYes}
     Select Radiobutton  ${payYes}
@@ -39,7 +39,7 @@ UTCID03
     Click  ${buttonSave}
     Element Should Be Visible  ${invalid}
 
-UTCID04    
+BIID04    
     Press Key  t'-99999'  ${tb_penalty}
     Select Radiobutton  ${ruleYes}
     Select Radiobutton  ${payNo}
@@ -49,37 +49,37 @@ UTCID04
     Click  ${buttonSave}
     Element Should Be Visible  ${invalid}
 
-UTCID05
+BIID05
     Press Key  t'1'  ${tb_penalty}
     Select Radiobutton  ${ruleYes}
-    Select Radiobutton  ${payNo}
+    Select Radiobutton  ${payYes}
     ${money}  Get Text From Textbox  ${tb_moneyLeft}
     Sleep  2s  UI may not update immediately
     Should Be Equal As Integers  ${money}  0
     Click  ${buttonSave}
     Element Should Be Visible  ${saved}
 
-UTCID06
+BIID06
     Press Key  t'1'  ${tb_penalty}
-    Select Radiobutton  ${ruleYes}
+    Select Radiobutton  ${ruleNo}
     Select Radiobutton  ${payYes}
     ${money}  Get Text From Textbox  ${tb_moneyLeft}
-    Should Not Be Equal As Integers  ${money}  0
+    Should Be Equal As Integers  ${money}  0
     Sleep  2s  UI may not update immediately
     Click  ${buttonSave}
     Element Should Be Visible  ${saved}
 
-UTCID07
+BIID07
     Press Key  s'BACK'  ${tb_penalty}
     Select Radiobutton  ${ruleYes}
     Select Radiobutton  ${payYes}
     ${money}  Get Text From Textbox  ${tb_moneyLeft}
     Sleep  2s  UI may not update immediately
-    Should Not Be Equal As Integers  ${money}  0
+    Should Be Equal As Integers  ${money}  0
     Click  ${buttonSave}
     Element Should Be Visible  ${invalidNull}
 
-UTCID08    
+BIID08    
     Press Key  s'BACK'  ${tb_penalty}
     Select Radiobutton  ${ruleYes}
     Select Radiobutton  ${payNo}
