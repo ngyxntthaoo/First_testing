@@ -171,4 +171,4 @@ Search
     [Arguments]    ${search str}
     Press Key  t'${search str}'  ${tb_search}
     Click  ${btn_menu_search}
-    Search Table  ${table_menu}  ${search str}  ${True}  DishesName  DishesPrice
+    Search Table  ${table_menu}  ${search str}  ${True}  ${False}  DishesName  DishesPrice

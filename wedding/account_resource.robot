@@ -15,6 +15,8 @@ ${formAccount}  ${formHome}/Window[@AutomationId="FormAccount"]
 ${accCreated}  ${formAccount}/Window/Text[@Name="Account created!"]
 ${invalid iden}  ${formAccount}/Window/Text[@Name="Invalid Identification"]
 ${accDeleted}  ${formAccount}/Window/Text[@Name="Account deleted!"]
+${username_pls}  ${formAccount}/Window/Text[@Name="Please enter username"]
+${accExisted}  ${formAccount}/Window/Text[@Name="Username already exists!"]
 
 # buttons
 ${btnAccount}  ${formHome}/Pane[@AutomationId="searchDropDown1"]/Pane[@AutomationId="flowLayoutPanel1"]/Button[@AutomationId="btnAccount"]
@@ -38,21 +40,23 @@ Test Setup
     Run Keyword If  ${Result} == ${False}  Open Account Form
 
 Add Account
-    [Arguments]    ${user}=""    ${pass}=""    ${name}=""    ${iden}="123456789012"
+    [Arguments]    ${user}=""    ${pass}=""    ${name}=""    ${iden}="123456789012"  ${level}=3
     [Documentation]    A keyword for adding a new account
     ...                with username and password
     ...                if empty, username and password will be generated
     ...                name and identification are optional
     [Tags]    Account
     ${random} =  Generate Random String  10
-    ${user} =  Set Variable If  ${user} == ""  ${random}  ${user}
-    ${pass} =  Set Variable If  ${pass} == ""  ${random}  ${pass}
+    ${user} =  Set Variable If  "${user}" == ""  ${random}  ${user}
+    ${pass} =  Set Variable If  "${pass}" == ""  ${random}  ${pass}
     Set Test Variable  ${username}  ${user}
     Set Test Variable  ${password}  ${pass}
     Press Key  t'${username}'  ${tb_username}
     Press Key  t'${password}'  ${tb_password}
     Press Key  t'${name}'  ${tb_name}
     Press Key  t'${iden}'  ${tb_iden}
+    Click  ${formAccount}/ComboBox[@AutomationId="cbb_level"]/Button
+    Click  ${formAccount}/ComboBox[@AutomationId="cbb_level"]/List/ListItem[${level}]
     Click  ${btn_add_account}
 
 Open Account Form
@@ -73,7 +77,8 @@ Search Account
     ...                If the table contains no accounts, it will also return True
     ...                This keyword return False when there is at least
     ...                one account that does not contain the string to search
-    Press Key  t'${string to search}'  ${tb_search}
+    # if string to search is empty then don't press key
+    Run Keyword If  "${string to search}" != ""  Press Key  t'${string to search}'  ${tb_search}
     Press Key  s'ENTER'
     ${continue}  Set Variable  ${True}
     ${wrong}  Set Variable  ${False}
