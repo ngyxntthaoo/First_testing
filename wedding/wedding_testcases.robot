@@ -71,7 +71,7 @@ UTCID01
     Shutdown Application
 
 UTCID02
-    Input Wedding  "Sảnh A1"  "Trưa"  nguyễn văn an  0904163258  500  10  nguyễn văn an  lê huyền trân  100000000  2022  30  10  2022  2  11  500  500
+    Input Wedding  "Sảnh A1"  "Trưa"  lê nguyên khang  0904163258  500  10  lê nguyên khang  nguyễn như bình  100000000  2022  30  10  2022  2  11  500  500
     Click  ${btn_add wedding}
     Element Should Exist  ${wedding form}/Window[@Name="SUCCESS"]
     ENTER
@@ -90,7 +90,7 @@ UTCID02
     Set Test Variable  ${i}  -1
     Press Key  s'DOWN'
     Press Key  s'RIGHT'
-    Select Cell With Attribute And Value  ${wedding table}  Representative  nguyễn văn an
+    Select Cell With Attribute And Value  ${wedding table}  Representative  lê nguyên khang
     Set Test Variable  ${i}  -1
     Press Key  s'DOWN'
     Press Key  s'RIGHT'
@@ -106,11 +106,11 @@ UTCID02
     Set Test Variable  ${i}  -1
     Press Key  s'DOWN'
     Press Key  s'RIGHT'
-    Select Cell With Attribute And Value  ${wedding table}  Groom name  nguyễn văn an
+    Select Cell With Attribute And Value  ${wedding table}  Groom name  lê nguyên khang
     Set Test Variable  ${i}  -1
     Press Key  s'DOWN'
     Press Key  s'RIGHT'
-    Select Cell With Attribute And Value  ${wedding table}  Bride name  lê huyền trân
+    Select Cell With Attribute And Value  ${wedding table}  Bride name  nguyễn như bình
     Set Test Variable  ${i}  -1
     Press Key  s'DOWN'
     Press Key  s'RIGHT'
@@ -134,7 +134,7 @@ UTCID02
 
 UTCID04
     # this time all names are upercase
-    Input Wedding  "Sảnh A1"  "Trưa"  NGUYỄN VĂN AN  0904163258  500  10  NGUYỄN VĂN AN  LÊ HUYỀN TRÂN  100000000  2022  30  10  2022  2  11  500  500
+    Input Wedding  "Sảnh A1"  "Trưa"  NGUYỄN TRƯỜNG AN  0904163258  500  10  NGUYỄN TRƯỜNG AN  NGUYỄN THANH XUYÊN  100000000  2022  30  10  2022  2  11  500  500
     Click  ${btn_add wedding}
     Element Should Exist  ${wedding form}/Window[@Name="SUCCESS"]
     ENTER
@@ -153,7 +153,7 @@ UTCID04
     Set Test Variable  ${i}  -1
     Press Key  s'DOWN'
     Press Key  s'RIGHT'
-    Select Cell With Attribute And Value  ${wedding table}  Representative  NGUYỄN VĂN AN
+    Select Cell With Attribute And Value  ${wedding table}  Representative  NGUYỄN TRƯỜNG AN
     Set Test Variable  ${i}  -1
     Press Key  s'DOWN'
     Press Key  s'RIGHT'
@@ -170,11 +170,11 @@ UTCID04
     Set Test Variable  ${i}  -1
     Press Key  s'DOWN'
     Press Key  s'RIGHT'
-    Select Cell With Attribute And Value  ${wedding table}  Groom name  NGUYỄN VĂN AN
+    Select Cell With Attribute And Value  ${wedding table}  Groom name  NGUYỄN TRƯỜNG AN
     Set Test Variable  ${i}  -1
     Press Key  s'DOWN'
     Press Key  s'RIGHT'
-    Select Cell With Attribute And Value  ${wedding table}  Bride name  LÊ HUYỀN TRÂN
+    Select Cell With Attribute And Value  ${wedding table}  Bride name  NGUYỄN THANH XUYÊN
     Set Test Variable  ${i}  -1
     Press Key  s'DOWN'
     Press Key  s'RIGHT'
